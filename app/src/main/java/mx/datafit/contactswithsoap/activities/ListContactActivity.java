@@ -1,14 +1,15 @@
 package mx.datafit.contactswithsoap.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class ListContactActivity extends AppCompatActivity implements TaskContac
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setLogo(R.mipmap.ic_launcher);
 
         listContacts = (ListView) findViewById(R.id.list_contacts);
 
@@ -62,8 +64,22 @@ public class ListContactActivity extends AppCompatActivity implements TaskContac
         if (size > 0) {
             contactAdapter = new ContactAdapter(ListContactActivity.this, contacts);
             listContacts.setAdapter(contactAdapter);
+            listContacts.setOnItemClickListener(details);
         } else {
             Toast.makeText(getBaseContext(), getString(R.string.no_contacts), Toast.LENGTH_LONG).show();
         }
     }
+
+    private AdapterView.OnItemClickListener details = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent  = new Intent(ListContactActivity.this, DetailsActivity.class);
+            TextView name  = (TextView) view.findViewById(R.id.name);
+            Contact avatar = (Contact) contactAdapter.getItem(position);
+            intent.putExtra("id", (int) id);
+            intent.putExtra("name", name.getText());
+            intent.putExtra("avatar", avatar.getAvatar());
+            startActivity(intent);
+        }
+    };
 }

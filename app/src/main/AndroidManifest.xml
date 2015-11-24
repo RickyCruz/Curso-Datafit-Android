@@ -4,6 +4,8 @@
 
     <!-- Permiso para conectarse a Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permiso para realizar llamadas -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -20,6 +22,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.DetailsActivity"
+            android:label="@string/title_activity_details"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mx.datafit.contactswithsoap.activities.ListContactActivity" />
         </activity>
     </application>
 

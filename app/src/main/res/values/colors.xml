@@ -7,4 +7,5 @@
     <color name="colorBkgCard">#CABBBBBB</color>
     <color name="colorBkgCardDark">#39CCCCCC</color>
     <color name="colorBkgCardPressed">#E1BEE7</color>
+    <color name="colorBackgroundActivity">#DEE4EE</color>
 </resources>

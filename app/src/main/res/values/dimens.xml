@@ -4,4 +4,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="avatar_size">64dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="normal_space_1">16dp</dimen>
+    <dimen name="normal_space_2">8dp</dimen>
+    <string name="label_info_contact">Información del contacto</string>
+    <string name="label_desc_contact">Descripción</string>
 </resources>

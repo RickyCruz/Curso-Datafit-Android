@@ -75,4 +75,45 @@ public class WebService {
 
         return contacts;
     }
+
+    public Contact getById (int id) {
+        Contact contact = new Contact();
+        request         = new SoapObject(Config.NameSpace, Config.GetById);
+        http            = new HttpTransportSE(Config.HttpTransportSE);
+        envelope        = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = false;
+        request.addProperty("id", id);
+        envelope.setOutputSoapObject(request);
+
+        try {
+            http.call(Config.CapeConnect + Config.GetById, envelope);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            System.out.print(e.toString());
+            return null;
+        }
+
+        try {
+            resultSoap = (SoapObject) envelope.getResponse();
+            if (resultSoap != null) {
+                contact.setId(Integer.parseInt(resultSoap.getPropertyAsString("id")));
+                contact.setAvatar(resultSoap.getPropertyAsString("photo"));
+                contact.setName(resultSoap.getPropertyAsString("name"));
+                contact.setLastname(resultSoap.getPropertyAsString("lastname"));
+                contact.setCellphone(resultSoap.getPropertyAsString("cellphone"));
+                contact.setPhone(resultSoap.getPropertyAsString("phone"));
+                contact.setEmail(resultSoap.getPropertyAsString("email"));
+                contact.setDescription(resultSoap.getPropertyAsString("description"));
+            } else {
+                return null;
+            }
+        } catch (SoapFault soapFault) {
+            soapFault.printStackTrace();
+            return null;
+        }
+
+        return contact;
+    }
 }
