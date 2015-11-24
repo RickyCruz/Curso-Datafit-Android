@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+    name="Contactos"
+    targetNamespace="http://www.datafit.mx/Contactos.wsdl"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://www.datafit.mx/Contactos.wsdl"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd1="http://www.datafit.mx/Contactos.xsd1">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Created by Ricky Cruz</wsdl:documentation>
+    <wsdl:types>
+        <xsd:schema
+            targetNamespace="http://www.datafit.mx/Contactos.xsd1"
+            xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd1="http://www.datafit.mx/Contactos.xsd1">
+            <xsd:complexType name="Contact">
+                <xsd:annotation>
+                    <xsd:documentation>Tipo de dato complejo que almacena los datos relevantes del contacto</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="id" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="photo" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="fullname" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cellphone" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="email" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ContactDetail">
+                <xsd:annotation>
+                    <xsd:documentation>Definiendo un tipo de dato complejo para almacenar la informacion de un contacto</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="id" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="photo" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="name" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="lastname" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cellphone" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="phone" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="email" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="description" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ContactList">
+                <xsd:annotation>
+                    <xsd:documentation>Listado de contactos</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element
+                        maxOccurs="unbounded"
+                        minOccurs="1"
+                        name="contact"
+                        type="xsd1:Contact"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="deleteContactResponse">
+        <wsdl:part name="status" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="deleteContactRequest">
+        <wsdl:part name="id" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="addContactRequest">
+        <wsdl:part name="photo" type="xsd:string"/>
+        <wsdl:part name="name" type="xsd:string"/>
+        <wsdl:part name="lastname" type="xsd:string"/>
+        <wsdl:part name="cellphone" type="xsd:string"/>
+        <wsdl:part name="phone" type="xsd:string"/>
+        <wsdl:part name="email" type="xsd:string"/>
+        <wsdl:part name="description" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="addContactResponse">
+        <wsdl:part name="status" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="getContactRequest">
+        <wsdl:part name="id" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="getContactResponse">
+        <wsdl:part name="contact" type="xsd1:ContactDetail"/>
+    </wsdl:message>
+    <wsdl:message name="getContactListRequest">   </wsdl:message>
+    <wsdl:message name="getContactListResponse">
+        <wsdl:part name="contacts" type="xsd1:ContactList"/>
+    </wsdl:message>
+    <wsdl:portType name="ContactosPortType">
+        <wsdl:operation name="getContacts">
+            <wsdl:input message="tns:getContactListRequest"/>
+            <wsdl:output message="tns:getContactListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getContact">
+            <wsdl:input message="tns:getContactRequest"/>
+            <wsdl:output message="tns:getContactResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addContact">
+            <wsdl:input message="tns:addContactRequest"/>
+            <wsdl:output message="tns:addContactResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteContact">
+            <wsdl:input message="tns:deleteContactRequest"/>
+            <wsdl:output message="tns:deleteContactResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ContactosBinding" type="tns:ContactosPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getContacts">
+            <soap:operation
+                soapAction="capeconnect:Contactos:ContactosPortType#getContacts"/>
+            <wsdl:input>
+                <soap:body parts="" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="contacts" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getContact">
+            <soap:operation soapAction="capeconnect:Contactos:ContactosPortType#getContact"/>
+            <wsdl:input>
+                <soap:body parts="id" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="contact" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addContact">
+            <soap:operation soapAction="capeconnect:Contactos:ContactosPortType#addContact"/>
+            <wsdl:input>
+                <soap:body
+                    parts="photo name lastname phone cellphone email description"
+                    use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="status" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteContact">
+            <soap:operation
+                soapAction="capeconnect:Contactos:ContactosPortType#deleteContact"/>
+            <wsdl:input>
+                <soap:body parts="id" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="status" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Contactos">
+        <wsdl:port binding="tns:ContactosBinding" name="ContactosPort">
+            <soap:address location="http://localhost/api-datafit/server.php"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
