@@ -4,6 +4,14 @@
     <string name="loading_contacts">Obteniendo información…</string>
     <string name="no_contacts">No tienes contactos :\'(</string>
 
+    <string name="dialog_delete_title">Eliminar Contacto</string>
+    <string name="dialog_delete_msg">¿Estás seguro que deseas eliminar el contacto seleccionado? Esta acción no podrá deshacerse</string>
+    <string name="dialog_delete_btn">Cancelar</string>
+    <string name="dialog_delete_ok">Si</string>
+    <string name="delete_msg">Contacto eliminado correctamente</string>
+    <string name="deleting_contacts">Eliminando contacto...</string>
+    <string name="delete_msg_error">Ha ocurrido un error al eliminar el contacto</string>
+
     <string name="title_activity_details">DetailsActivity</string>
     <string name="label_info_contact">Información del contacto</string>
     <string name="label_desc_contact">Descripción</string>

@@ -148,4 +148,29 @@ public class WebService {
 
         return status;
     }
+
+    public int delete(int id) {
+        int status;
+        request         = new SoapObject(Config.NameSpace, Config.Delete);
+        http            = new HttpTransportSE(Config.HttpTransportSE);
+        envelope        = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = false;
+        request.addProperty("id", id);
+        envelope.setOutputSoapObject(request);
+        try {
+            http.call(Config.CapeConnect + Config.Delete, envelope);
+            SoapObject response = (SoapObject) envelope.bodyIn;
+            SoapPrimitive value = (SoapPrimitive) response.getProperty(0);
+            status = Integer.parseInt(value.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            status = 0;
+        } catch (Exception e) {
+            System.out.print(e.toString());
+            status = 0;
+        }
+
+        return status;
+    }
+
 }
