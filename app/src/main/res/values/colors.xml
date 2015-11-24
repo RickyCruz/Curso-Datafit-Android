@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#9575CD</color>
+    <color name="colorPrimaryDark">#7E57C2</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="borderDark">#FFEEEEEE</color>
+    <color name="colorBkgCard">#CABBBBBB</color>
+    <color name="colorBkgCardDark">#39CCCCCC</color>
+    <color name="colorBkgCardPressed">#E1BEE7</color>
 </resources>
