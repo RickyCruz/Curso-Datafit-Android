@@ -3,6 +3,7 @@ package mx.datafit.contactswithsoap.webservice;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
@@ -115,5 +116,36 @@ public class WebService {
         }
 
         return contact;
+    }
+
+    public int create(String name, String lastname, String cellphone, String phone, String email, String desc) {
+        int status;
+        request         = new SoapObject(Config.NameSpace, Config.Add);
+        http            = new HttpTransportSE(Config.HttpTransportSE);
+        envelope        = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = false;
+
+        request.addProperty("photo", "img/default.png");
+        request.addProperty("name", name);
+        request.addProperty("lastname", lastname);
+        request.addProperty("cellphone", cellphone);
+        request.addProperty("phone", phone);
+        request.addProperty("email", email);
+        request.addProperty("description", desc);
+        envelope.setOutputSoapObject(request);
+        try {
+            http.call(Config.CapeConnect + Config.Add, envelope);
+            SoapObject response = (SoapObject) envelope.bodyIn;
+            SoapPrimitive value = (SoapPrimitive) response.getProperty(0);
+            status = Integer.parseInt(value.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            status = 0;
+        } catch (Exception e) {
+            System.out.print(e.toString());
+            status = 0;
+        }
+
+        return status;
     }
 }

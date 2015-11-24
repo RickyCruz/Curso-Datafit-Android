@@ -8,6 +8,5 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="normal_space_1">16dp</dimen>
     <dimen name="normal_space_2">8dp</dimen>
-    <string name="label_info_contact">Información del contacto</string>
-    <string name="label_desc_contact">Descripción</string>
+    <dimen name="edit_text_padding">20dp</dimen>
 </resources>

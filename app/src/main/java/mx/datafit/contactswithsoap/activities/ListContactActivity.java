@@ -50,7 +50,9 @@ public class ListContactActivity extends AppCompatActivity implements TaskContac
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_new_contact) {
+            Intent intent = new Intent(this, NewContactActivity.class);
+            startActivity(intent);
             return true;
         }
 
