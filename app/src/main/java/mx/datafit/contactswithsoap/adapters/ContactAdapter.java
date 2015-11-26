@@ -76,6 +76,10 @@ public class ContactAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void removeItem(int position) {
+        items.remove(position);
+    }
+
     static class ViewHolder {
         ImageView avatar;
         TextView name;

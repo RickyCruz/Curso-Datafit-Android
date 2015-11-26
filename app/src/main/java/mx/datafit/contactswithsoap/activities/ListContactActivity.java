@@ -92,7 +92,7 @@ public class ListContactActivity extends AppCompatActivity implements TaskContac
 
     private AdapterView.OnItemLongClickListener delete = new AdapterView.OnItemLongClickListener() {
         @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, final long id) {
+        public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, final long id) {
             AlertDialog.Builder alert = new AlertDialog.Builder(ListContactActivity.this);
             alert.setIcon(R.mipmap.ic_launcher);
             alert.setTitle(getString(R.string.dialog_delete_title));
@@ -108,8 +108,8 @@ public class ListContactActivity extends AppCompatActivity implements TaskContac
                 public void onClick(DialogInterface dialog, int which) {
                     DeleteTask deleteTask = new DeleteTask(ListContactActivity.this);
                     deleteTask.execute((int) id);
-                    ContactsTask contactsTask = new ContactsTask(ListContactActivity.this);
-                    contactsTask.execute();
+                    contactAdapter.removeItem(position);
+                    contactAdapter.notifyDataSetChanged();
                 }
             });
             alert.create();
